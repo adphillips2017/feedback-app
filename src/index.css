@@ -185,11 +185,19 @@ input:focus {
   color: rebeccapurple;
 }
 
-/* FIX: Remove position: absolute to keep about icon at the bottom of the
- * document */
+.header-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header-link:hover {
+  color: #fff;
+}
+
 .about-link {
-  display: flex;
-  justify-content: flex-end;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 /* FIX: Remove position: absolute to keep about icon at the bottom of the
