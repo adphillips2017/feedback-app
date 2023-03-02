@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import FeedbackContext from '../context/FeedbackContext'
 import Card from './shared/Card'
@@ -12,7 +11,15 @@ function FeedbackForm() {
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [message, setMessage] = useState('')
 
-  const { addFeedback } = useContext(FeedbackContext)
+  const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext)
+
+  useEffect(() => {
+    if (!feedbackEdit.edit) return
+
+    setBtnDisabled(false)
+    setText(feedbackEdit.item.text)
+    setRating(feedbackEdit.item.rating)
+  }, [feedbackEdit])
 
   const handleTextChange = ({target: {value}}) => {
     setText(value)
@@ -34,7 +41,13 @@ function FeedbackForm() {
     if (text.trim().length < 10) return
 
     const newFeedback = { text, rating }
-    addFeedback(newFeedback)
+
+    if (feedbackEdit.edit) {
+      updateFeedback(feedbackEdit.item.id, newFeedback)
+    } else {
+      addFeedback(newFeedback)
+    }
+
     setText('')
   }
 
@@ -58,10 +71,6 @@ function FeedbackForm() {
       </form>
     </Card>
   )
-}
-
-FeedbackForm.protoTypes = {
-  handleAdd: PropTypes.func.isRequired
 }
 
 export default FeedbackForm

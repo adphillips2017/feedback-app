@@ -21,9 +21,7 @@ function FeedbackList() {
             exit={{ opacity: 0 }}
           >
             <FeedbackItem
-              key={item.id}
-              id={item.id}
-              text={item.text}
+              item={item}
               rating={item.rating}
             />
           </motion.div>

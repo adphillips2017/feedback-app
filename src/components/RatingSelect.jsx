@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-function RatingSelect({ select, selected}) {
+function RatingSelect({ select, selected }) {
   const handleChange = (e) => {
     select(+e.currentTarget.value)
   }
@@ -25,8 +25,8 @@ function RatingSelect({ select, selected}) {
 }
 
 RatingSelect.protoTypes = {
-  selected: PropTypes.number.isRequired,
-  select: PropTypes.func.isRequired
+  select: PropTypes.func.isRequired,
+  selected: PropTypes.bool.isRequired
 }
 
 export default RatingSelect
